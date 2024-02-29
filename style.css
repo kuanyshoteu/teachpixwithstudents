@@ -1,38 +1,260 @@
-body{
+/*
+    1. Global Style
+    2. Structure
+    3. Typography
+    4. Component style
+    5. Media queries
+        --primary-100:#2C3A4F;
+    --primary-200:#56647b;
+    --primary-300:#b4c2dc;
+    --accent-100:#FF4D4D;
+    --accent-200:#ffecda;
+    --text-100:#FFFFFF;
+    --text-200:#e0e0e0;
+    --bg-100:#1A1F2B;
+    --bg-200:#292e3b;
+    --bg-300:#414654;
+      
+==========================================*/
+
+/* 1. Global Style */
+
+body {
     margin: 0;
 }
-h1{
-    font-size: 100px;
-   
+
+/* 2. Structure */
+body {
+    background-color: #1A1F2B;
+    color: white;
 }
-.Zhienkozha{
+header {
+    height: 5.3rem;
+    width: 100%;
+    border-bottom: 1px solid #303540;
+
+}
+nav {
+    margin: 1rem 2rem;
+    float: left;
+}
+.wrapper {
+    margin: 0 4rem 0 4rem;
+    
+}
+.dflex{
     display: flex;
-    background-color: aqua;
-    align-items: center;
-    justify-content: center;
 }
-.ZhienkozhaRed{
+#generate-block {
+    display: block;
+}
+
+/* 3. Typography */
+
+body {
+    line-height: 45px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+nav span {
+    font-family: 'Common Pixel', sans-serif;
+    color: white;
+    font-size: 2rem;
+    padding: 2rem;
+}
+nav span::after {
+    content: "|";
+    color: white;
+    margin-left: 2rem;
+}
+i {
+    font-size: 1.5rem;
+}
+a {
+    text-decoration: none;
+}
+button {
+    font-family: 'Common Pixel', sans-serif;
+}
+label {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.75rem;
+}
+/* 4. Component style */
+
+#hero {
+    margin-top: 5rem;
+}
+.input {
+    display: block;
+    border-radius: 0.2;
+    margin: 1rem 0;
+    width: 20rem;
+}
+input {
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+    width: 5rem;
+    border: 1px;
+    border-radius: 1rem;
+    height: 2rem;
+    text-align: center;    
+}
+
+label {
+    display: block;
+    text-align: center;
+    width: 20rem;
+    margin-bottom: 1rem;
+}
+.btn {
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+}
+#generate-btn {
+    box-shadow: 
+      -4px 2px 1px 1px grey,
+      -4px -2px 1px 1px lightgray,
+      4px 0px 1px 1px lightgray; 
+    margin-left: 6rem;
+    background-color: #f2dc5d;
+    border: 1px;
+    border-radius: 1rem;
+    height: 2rem;
+    width: 8rem;
+}
+#generate-btn:hover {
+    top: 5px;
+    box-shadow: 
+        inset -4px 2px 1px 1px grey,
+        inset -4px -2px 1px 1px lightgray,
+        inset 4px 0px 1px 1px lightgray;         
+} 
+.generate-box {
     display: flex;
-    background-color: red;
-    align-items: center;
-    justify-content: center;
 }
-.paintbox{
-    height: 500px;
-    width: 500px;
+.generate-tools {
+    background-color: #2C3A4F;
+    width: 40px;
+    position: relative;
+    float: left;
+}
+.generate-tools i {
+    text-align: center;
+}
+.tool {
+    height: 50px;
+    background-color: #2C3A4F;
+    border: 0;
+    display: block;
+    width: 100%;
+}
+.toolIcon:hover {
+    background-color: #c4a300;
+    border-radius: 29px;
+    box-shadow: 
+                2px 2px 2px #c4a300,
+                10px 1px 12px #c4a300,
+                2px 2px 10px #c4a300,
+                2px 2px 3px #c4a300,
+                inset 2px 2px 10px #c4a300,
+                inset 2px 2px 10px #c4a300,
+                inset 2px 2px 10px #c4a300,
+                inset 2px 2px 10px #c4a300;
+}
+#random {
+    margin-top: 20rem;
+}
+.generate-toolbar {
+    display: flex;
+    width: 100px;
+    background-color: aliceblue;
+}
+.right-side {
+    width: 15%;
+    text-align: right;
+    margin-left: 0.5rem;
+}
+.tools {
+    width: 70%;
+    display: grid;
+    grid-template-columns: auto auto;
+    height: 10rem;
+    margin: 2rem 0 0 1rem;
+}
+.drawIcon {
+    color: #27285c
+}
+.drawIcon:hover {
+    cursor: pointer;
+}
+.drawIcon:active {
+    color: #f2dc5d;
+}
+#generate-window {
+    height: auto;
+    position: relative;
+    float: right;
     background-color: white;
-    box-shadow: 0px 0px 5px 5px black;
 }
-button{
+.close-btn {
+    font-size: 2rem;
+    display: block;
+    color: #27285C;
+    margin: 1rem 0.5rem;  
+}
+.close-btn:hover {
+    cursor: pointer;
+    color: #f2dc5d;
+}
+.drag-btn {
+    font-size: 2rem;
+    margin: 10rem 0.5rem 0 0.5rem;
+    color: #27285C;
+}
+.drag-btn:hover {
+    cursor: pointer;
+}
+.drag-btn:active {
+    cursor: grabbing;
+}
+
+.flex{
+    display: flex;
+}
+.center{
+    justify-content: center;
+}
+.leftScreen{
+    left: 0;
+    position: absolute;    
+    background: #566172;
+    box-shadow: 0 50px 300px 100px #992e2e;
+}
+.rightScreen{
+    right: 0;
+    position: absolute;    
+    background: #111316;
+    box-shadow: 0 50px 300px 100px #7f7f00;
+
+}
+.light{
+    width: 1px;
+    height: 1px;
+}
+.m60{
+    margin: 60px;
+}
+.m120{
+    margin-top: 120px;
+    margin-bottom: 30px;
+}
+h1{
+    margin: 0;
     font-size: 50px;
 }
-.hidden{
-    display: none;
-}
-.pixel{
-    width: 18px;
-    height: 18px;
-    position: absolute;
-    background-color: white;
-    border: 1px solid black;
+p{
+    line-height: 45px;
+    margin: 0;
+    font-size: 30px;
 }
