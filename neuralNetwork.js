@@ -30,22 +30,24 @@ function initializeNeurons(){
 		neurons.push(crntLayer);
 	}	
 }
+
 function initializeFreeTerms(){
-	for(let i = 1; i < numberOfLayers; i++){
+	for(let i = 0; i < numberOfLayers-1; i++){
 		let crntTerms = [];
-		for(let j = 0; j < lengthOfLayers[i]; j++){
-			crntTerms.push(Math.random() * (Math.floor(Math.random() * 10) + 17));
+		for(let j = 0; j < lengthOfLayers[i+1]; j++){
+			crntTerms.push(6);
 		}
 		freeTerms.push(crntTerms);
 	}
 }
+
 function initializeEdges(){
 	for(let layerFromIndex = 0; layerFromIndex < numberOfLayers-1; layerFromIndex++){
 		let crntEdges = []; //2d array, plane between layerFrom and layerFrom+1
 		for(let neuronToIndex = 0; neuronToIndex < lengthOfLayers[layerFromIndex+1]; neuronToIndex++){
 			let edgesOfOneNeuron = [] //1d array, row for on neuron (neuronTo) from layerFrom+1
 			for(let k = 0; k < lengthOfLayers[layerFromIndex]; k++){
-				edgesOfOneNeuron.push(Math.random()); 
+				edgesOfOneNeuron.push(0.5); 
 			}
 			crntEdges.push(edgesOfOneNeuron);
 		}
@@ -85,12 +87,20 @@ async function updateNeurons(){
 			neurons[0][y*fieldWidth + x] = 1;
 		}
 	}
+	for(let j = 0; j < fieldWidth*fieldHeight; j++){
+		neurons[0][j] = 0;
+	}
 	for(let i = 1; i < numberOfLayers; i++){
 		for(let j = 0; j < lengthOfLayers[i]; j++){
 			neurons[i][j] = 0;
 			let neuronHTML = document.getElementById("neuron_layer" + i + "_neuron"+j);
 			neuronHTML.innerHTML = "0";
+			neuronHTML.style.backgroundColor = "white"
 		}
+	}
+	let answers = document.getElementsByClassName("answer");
+	for(let i = 0; i < answers.length; i++){
+		answers[i].style.border = "none";
 	}
 }
 
@@ -100,5 +110,5 @@ function predict(){
             calculateNeuron(layerFrom,  neuronIndex);
         }
     }
-    circleAnswer();
+    return circleAnswer();
 }

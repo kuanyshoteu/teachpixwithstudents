@@ -1,5 +1,6 @@
 // 2d array, every array is one picture
 let allPictures = []; 
+let rightAnswers = []
 
 // Нынешний один рисунок
 let picture = [];

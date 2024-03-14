@@ -6,6 +6,8 @@ let sectioNeurons = document.getElementById("neuronSection");
 let originalPixel = document.getElementById("originalPixel");
 let graphsSection = document.getElementById("graphsSection");
 
+let allPicturesBox = document.getElementById("allPicturesBox");
+
 let pixelHeight = 20
 let pixelWidth = 20
 
@@ -23,21 +25,24 @@ function setWidthForSomeBoxes(){
 }
 setWidthForSomeBoxes()
 
-function placePixels(){
+function placePixels(crntPictureIndex, crntPaintbox, crntPixelHeight, crntPixelWidth, leftStart){
     let leftCoord;
     for(let i = 0; i < fieldHeight; i++){
-        leftCoord = 0
+        leftCoord = leftStart
         for(let j = 0; j < fieldWidth; j++){
             let copyPixel = originalPixel.cloneNode(true);
+            copyPixel.style.height = crntPixelHeight+"px";
+            copyPixel.style.width = crntPixelWidth+"px";
             copyPixel.style.left = leftCoord+"px";
-            copyPixel.style.top = (0 + i*pixelHeight)+"px";
-            copyPixel.id = "pixel_i" + i+"j"+j;
-            paintbox.appendChild(copyPixel)
-            leftCoord += pixelWidth;
+            copyPixel.style.top = (0 + i*crntPixelHeight)+"px";
+            copyPixel.id = "pixel_p"+crntPictureIndex+"i" + i+"j"+j;
+            crntPaintbox.appendChild(copyPixel)
+            leftCoord += crntPixelWidth;
         }
     }
 }
-placePixels();
+placePixels(0, paintbox, 20, 20, 0);
+
 
 let needPaint = false;
 onmousedown = function(event){
@@ -54,24 +59,62 @@ onmousemove = function(event){
         let i = parseInt((event.clientY - paintbox.offsetTop + scrollY)/pixelHeight);        
         
         lastDrawing.push([i, j]);
-        let crntPixel = document.getElementById("pixel_i"+i+"j"+j)
+        let crntPixel = document.getElementById("pixel_p0i"+i+"j"+j)
         crntPixel.style.backgroundColor = "rgb(255, 77, 77)";
         pictureInNumbers[i][j] = 1;
         neurons[0][i*fieldWidth+j] = 1;
         predict();
     }
 }
+let pictureIndex = 1;
+function savePicture(){
+    rightAnswer = document.getElementById("rightAnswerBox").value;
+    rightAnswers.push(parseInt(rightAnswer))
+    if(rightAnswers){
+        allPictures.push(neurons[0]);
+        smallCellSize = 4;
 
+        let smallPaintbox = document.createElement("div");
+        smallPaintbox.style.position = "relative"
+        allPicturesBox.appendChild(smallPaintbox);
+        placePixels(pictureIndex, smallPaintbox, smallCellSize, smallCellSize, (allPictures.length-1) * smallCellSize * (fieldWidth+1));
+        for(let i = 0; i < fieldHeight; i++){
+            for(let j = 0; j < fieldWidth; j++){
+                if(neurons[0][i*fieldWidth+j] == 1){
+                    let crntPixel = document.getElementById("pixel_p"+pictureIndex+"i"+i+"j"+j)
+                    crntPixel.style.backgroundColor = "rgb(255, 77, 77)";
+                }
+            }
+        }
+
+        pictureIndex++;
+
+        allPicturesLength = document.getElementById("allPicturesLength");
+        allPicturesLength.innerHTML = allPictures.length
+        picture = [];
+        clearPaint();
+        updateNeurons();
+    console.log(rightAnswers)
+    console.log(allPictures)
+    }
+}
+function clearPaint(){
+    for(let i = 0; i < fieldHeight; i++){
+        for(let j = 0; j < fieldWidth; j++){
+            let crntPixel = document.getElementById("pixel_p0i"+i+"j"+j)
+            crntPixel.style.backgroundColor = "rgb(255, 255, 255)";
+        }
+    }
+}
 document.onkeydown = undo;
 function undo(e){
     if (e.keyCode == 90 && e.ctrlKey) {
-        console.log(picture)
         if(picture.length > 0){
             let ld = picture[picture.length - 1]
             for(let i = 0; i < ld.length; i++){
                 y = ld[i][0]
                 x = ld[i][1]
-                let crntPixel = document.getElementById("pixel_i"+y+"j"+x)
+                let crntPixel = document.getElementById("pixel_p0i"+y+"j"+x)
                 crntPixel.style.backgroundColor = "white";
             }
             picture.pop();
@@ -79,7 +122,7 @@ function undo(e){
                 for(let j = 0; j < picture[i].length; j++){
                     y = picture[i][j][0]
                     x = picture[i][j][1]
-                    let crntPixel = document.getElementById("pixel_i"+y+"j"+x)
+                    let crntPixel = document.getElementById("pixel_p0i"+y+"j"+x)
                     crntPixel.style.backgroundColor = "rgb(255, 77, 77)";
                 }
             }

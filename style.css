@@ -73,13 +73,7 @@ i {
 a {
     text-decoration: none;
 }
-button {
-    font-family: 'Common Pixel', sans-serif;
-}
-label {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.75rem;
-}
+
 /* 4. Component style */
 
 #hero {
@@ -92,6 +86,8 @@ label {
     width: 20rem;
 }
 input {
+    font-size: 20px;
+    font-weight: 20px;
     margin-bottom: 2rem;
     margin-left: 1rem;
     width: 5rem;
@@ -108,7 +104,7 @@ label {
     margin-bottom: 1rem;
 }
 .btn {
-    font-family: 'Press Start 2P', cursive;
+   
     cursor: pointer;
 }
 #generate-btn {
@@ -143,7 +139,7 @@ label {
     text-align: center;
 }
 .tool {
-    height: 50px;
+    height: 70px;
     background-color: #2C3A4F;
     border: 0;
     display: block;
@@ -244,6 +240,9 @@ label {
 }
 .m60{
     margin: 60px;
+}
+.m30{
+    margin-top: 30px;
 }
 .m120{
     margin-top: 120px;

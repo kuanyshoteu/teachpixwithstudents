@@ -30,7 +30,7 @@
                         <div class="light rightScreen"></div>
                         <h1 style="text-align: center;background:rgba(0,0,0,0)">Draw your picture and see how neurons learn</h1>
                     </div>
-                    <p>We have new born neural network model here 🐣. <br>It doesn't know how any of the numbers look.<br>
+                    <p>We have new born neural network model here 🐣. It doesn't know how any of the numbers look.<br>
                         In order to teach, we need to give it lots of examples of pictures, so let's get started!
                         <br>
                     </p>
@@ -43,7 +43,7 @@
                         <span>
                             Enter your number here:   
                         </span>
-                        <input type="number" name="">
+                        <input id="rightAnswerBox" type="number" name="" value="1">
                     </p>
                     <p>
                         Then, press the <span style="background-color: rgb(255, 77, 77); border-radius: 5px;padding: 0 5px;">save</span> button to start the learning function.
@@ -54,7 +54,14 @@
                 <div class="wrapper dflex">
                     <div class="generate-box">
                         <div class="generate-tools htools">
-                            <button onclick="learn();" class="btn tool"><i class="fa-regular fa-floppy-disk" style="color: #ffffff;"></i></button>
+                            <button onclick="savePicture();" class="btn tool">
+                                <i class="fa-regular fa-floppy-disk" style="color: #ffffff;"></i>
+                                <span style="color: #ffffff;font-size: 12px;margin-left: -1px;font-weight: 600">save</span>
+                            </button>
+                            <button onclick="learn();" class="btn tool">
+                                <i style="color: #ffffff;" class="fa-solid fa-gears"></i>
+                                <span style="color: #ffffff;font-size: 12px;margin-left: -1px;font-weight: 600">learn</span>
+                            </button>
                         </div>
                         <div class="generate-toolbar htools">
                             <div class="tools">
@@ -81,6 +88,10 @@
                     </div>
                     <div id="graphsSection" class="generate-box"></div>
                 </div>
+                <div class="wrapper m30">
+                    <div id="allPicturesLength"></div>
+                    <div class="dflex" id="allPicturesBox"></div>
+                </div>
             </section>
         </main>
         <footer>
@@ -95,4 +106,5 @@
     <script src="neuralNetwork.js"></script>
     <script src="paint.js"></script>
     <script src="neuralNetworkHTML.js"></script>
+    <script src="gradientDescent.js"></script>
 </html>

@@ -7,7 +7,7 @@ let originalRect = document.getElementById("originalRect");
 
 let neuronHeight = 20;
 let neuronWidth = 20;
-let layerDistance = 300;
+let layerDistance = 200;
 let paddingLeft = 30;
 originalNeuron.style.width = neuronWidth+"px";
 originalNeuron.style.height = neuronHeight+"px";
@@ -44,6 +44,7 @@ function placeOneAnswer(answer, layerNumber, layerbox, crntLayerPadding){
     copyNeuron.style.border = "0";
     copyNeuron.style.color = "white";
     copyNeuron.style.fontSize = "13px"
+    copyNeuron.classList.add("answer")
     copyNeuron.style.top = (2+layerbox0.offsetTop + crntLayerPadding + answer*neuronHeight)+"px";
     copyNeuron.style.left = (paddingLeft +30+generateBox.offsetLeft + generateBoxWidth + (layerNumber-2)*layerDistance)+"px";
 
@@ -54,6 +55,7 @@ function placeOneAnswer(answer, layerNumber, layerbox, crntLayerPadding){
 function placeAnswers(){
     crntLayerBox = layerbox0.cloneNode(true);
     crntLayerBox.id = "layerboxanswers";
+
     let crntLayerPadding = (sectioNeurons.offsetHeight - neuronHeight * answers.length) / 2;
     for(let answer = 0; answer < answers.length; answer++){
         placeOneAnswer(answer, numberOfLayers, crntLayerBox, crntLayerPadding);
@@ -73,9 +75,13 @@ function placeOneRectangle(layerFromIndex, neuronFromIndex, neuronToIndex){
     crntRect.style.height = (Math.max(Math.max(neuronFrom.offsetTop, neuronTo.offsetTop) - Math.min(neuronFrom.offsetTop, neuronTo.offsetTop), 1))+"px";
 
     if(neuronFrom.offsetTop < neuronTo.offsetTop)
-        crntRect.classList.add("lineDown")
+        diagonal = " right";
     else
-        crntRect.classList.add("lineUp")
+        diagonal = " left";
+    let rgb = "rgb(48, 53, 64)";
+    let line = "linear-gradient(to top "+diagonal+", rgba(0,0,0,0) 0%, rgba(0,0,0,0) calc(50% - 0.5px),"+rgb+" calc(50% + 0.5px), rgba(0,0,0,0) calc(50% + 1px),rgba(0,0,0,0) 100%)"
+
+    crntRect.style.background = line;
     crntRect.id = "rect_layerFrom"+layerFromIndex+"layerTo"+layerToIndex+"neuronFrom"+neuronFromIndex+"neuronToIndex"+neuronToIndex;
     neuralNetworkBox.appendChild(crntRect);
 }
@@ -101,6 +107,7 @@ function circleAnswer(){
     }
     let maxResultAns = document.getElementById("answer_"+maxResultIndex)
     maxResultAns.style.border = "1px solid yellow"
+    return maxResultIndex;
 }
 
 placeNeurons();
