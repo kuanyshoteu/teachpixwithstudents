@@ -13,6 +13,10 @@ let pixelWidth = 20
 
 let generateBoxWidth = pixelWidth * fieldWidth + 140;
 
+function showNeuralNetwork(){
+    neuralNetworkSection = document.getElementById("neuralNetworkSection")
+    neuralNetworkSection.classList = "";
+}
 function setWidthForSomeBoxes(){
     for(let i = 0; i < htools.length; i++){
         htools[i].style.height = pixelHeight * fieldHeight + "px";

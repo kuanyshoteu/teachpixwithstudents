@@ -45,7 +45,7 @@ function initializeEdges(){
 	for(let layerFromIndex = 0; layerFromIndex < numberOfLayers-1; layerFromIndex++){
 		let crntEdges = []; //2d array, plane between layerFrom and layerFrom+1
 		for(let neuronToIndex = 0; neuronToIndex < lengthOfLayers[layerFromIndex+1]; neuronToIndex++){
-			let edgesOfOneNeuron = [] //1d array, row for on neuron (neuronTo) from layerFrom+1
+			let edgesOfOneNeuron = [] //1d array, row for one neuron (neuronTo) from layerFrom+1
 			for(let k = 0; k < lengthOfLayers[layerFromIndex]; k++){
 				edgesOfOneNeuron.push(0.5); 
 			}
@@ -53,6 +53,7 @@ function initializeEdges(){
 		}
 		weightedEdges.push(crntEdges);
 	}	
+
 }
 function initializeNeuralNetwork(){
 	initializeNeurons();

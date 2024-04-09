@@ -25,7 +25,8 @@ body {
 
 /* 2. Structure */
 body {
-    background-color: #1A1F2B;
+    background: rgb(26,31,43);
+    background: linear-gradient(180deg, rgba(26,31,43,1) 0%, rgba(26,31,43,1) 83%, rgba(24,24,24,1) 100%);
     color: white;
 }
 header {
@@ -47,6 +48,7 @@ nav {
 }
 #generate-block {
     display: block;
+    min-height: 100vh;
 }
 
 /* 3. Typography */
@@ -91,8 +93,8 @@ input {
     margin-bottom: 2rem;
     margin-left: 1rem;
     width: 5rem;
-    border: 1px;
-    border-radius: 1rem;
+    border: 1px solid yellow;
+    border-radius: 5px;
     height: 2rem;
     text-align: center;    
 }
@@ -103,9 +105,12 @@ label {
     width: 20rem;
     margin-bottom: 1rem;
 }
-.btn {
-   
+.btn-main {
+    background-color: #4e78a6;
+    padding: 15px 30px;
+    border-radius: 25px;
     cursor: pointer;
+    font-weight: 600;
 }
 #generate-btn {
     box-shadow: 
@@ -221,6 +226,13 @@ label {
 .center{
     justify-content: center;
 }
+.centerScreen{
+    left: 50%;
+    top: -450px;
+    position: absolute;    
+    background: white;
+    box-shadow: 0 0px 300px 500px #75787f;
+}
 .leftScreen{
     left: 0;
     position: absolute;    
@@ -242,7 +254,7 @@ label {
     margin: 60px;
 }
 .m30{
-    margin-top: 30px;
+    margin: 30px;
 }
 .m120{
     margin-top: 120px;
@@ -251,9 +263,21 @@ label {
 h1{
     margin: 0;
     font-size: 50px;
+    max-width: 900px;
 }
 p{
-    line-height: 45px;
+    line-height: 30px;
     margin: 0;
-    font-size: 30px;
+    font-size: 20px;
+}
+.conspect{
+    max-width: 700px;
+}
+.textcenter{
+    text-align: center;
+}
+.textgradient{
+background: linear-gradient(167deg, rgba(255,255,255,1) 0%, rgba(86,133,185,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

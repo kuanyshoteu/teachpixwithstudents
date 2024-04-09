@@ -15,25 +15,33 @@ neuronHeight+=10;
 
 let answers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+let neuronHeights = [[]];
+let layerHeights = [];
+
 function placeOneNeuron(neuron, layerIndex, layerbox, crntLayerPadding){
     let copyNeuron = originalNeuron.cloneNode(true);
-
-    copyNeuron.style.top = (layerbox0.offsetTop + crntLayerPadding + neuron*neuronHeight)+"px";
+    height = layerbox0.offsetTop + crntLayerPadding + neuron*neuronHeight;
+    
+    copyNeuron.style.top = height+"px";
     copyNeuron.style.left = (paddingLeft + layerDistance+generateBox.offsetLeft + generateBoxWidth + (layerIndex-2)*layerDistance)+"px";
 
     copyNeuron.id = "neuron_layer" + layerIndex+"_neuron"+ neuron;
     copyNeuron.innerHTML = "0";
     layerbox.appendChild(copyNeuron);
+
+    return height
 }
 
 function placeNeurons(){
     for(let layerIndex = 1; layerIndex < numberOfLayers; layerIndex++){
+        layerHeights = [];
         crntLayerBox = layerbox0.cloneNode(true);
         crntLayerBox.id = "layerbox"+layerIndex;
         let crntLayerPadding = (sectioNeurons.offsetHeight - neuronHeight * lengthOfLayers[layerIndex]) / 2;
         for(let neuronIndex = 0; neuronIndex < lengthOfLayers[layerIndex]; neuronIndex++){
-            placeOneNeuron(neuronIndex, layerIndex, crntLayerBox, crntLayerPadding);
+            layerHeights.push(placeOneNeuron(neuronIndex, layerIndex, crntLayerBox, crntLayerPadding));
         }
+        neuronHeights.push(layerHeights);
         neuralNetworkBox.appendChild(crntLayerBox);
     } 
 }
@@ -66,15 +74,20 @@ function placeAnswers(){
 function placeOneRectangle(layerFromIndex, neuronFromIndex, neuronToIndex){ 
     let layerToIndex = layerFromIndex + 1;   
     crntRect = originalRect.cloneNode(true);
+    
     neuronFrom = document.getElementById("neuron_layer"+layerFromIndex+"_neuron"+neuronFromIndex)
     neuronTo = document.getElementById("neuron_layer"+layerToIndex+"_neuron"+neuronToIndex)
 
-    crntRect.style.top = (Math.min(neuronFrom.offsetTop, neuronTo.offsetTop) + neuronHeight/2 - 5)+"px";
+    neuronFromHeight = neuronHeights[layerFromIndex][neuronFromIndex]
+    neuronToHeight = neuronHeights[layerFromIndex+1][neuronToIndex]
+
+    crntRect.style.top = (Math.min(neuronFromHeight, neuronToHeight) + neuronHeight/2 - 5)+"px";
     crntRect.style.left = (neuronFrom.offsetLeft + neuronWidth + 2)+"px";
     crntRect.style.width = (neuronTo.offsetLeft - neuronFrom.offsetLeft - neuronWidth - 3)+"px";
     crntRect.style.height = (Math.max(Math.max(neuronFrom.offsetTop, neuronTo.offsetTop) - Math.min(neuronFrom.offsetTop, neuronTo.offsetTop), 1))+"px";
 
-    if(neuronFrom.offsetTop < neuronTo.offsetTop)
+   
+    if(neuronFromHeight < neuronToHeight)
         diagonal = " right";
     else
         diagonal = " left";

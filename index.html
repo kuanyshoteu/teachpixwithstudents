@@ -10,13 +10,13 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-        <title>LearnPix</title>
+        <title>TeachPix</title>
     </head>
 
     <body>
         <header>
             <nav>
-                <span>LearnPix</span>
+                <span>TeachPix</span>
                 <span>About</span>
                 <a href="#"><i class="fa-regular fa-user" style="color: #ffffff;"></i></a>
             </nav>
@@ -24,77 +24,93 @@
 
         <main>
             <section id="generate-block">
-                <div class="wrapper ">
-                    <div class="dflex center m60">
-                        <div class="light leftScreen"></div>
-                        <div class="light rightScreen"></div>
-                        <h1 style="text-align: center;background:rgba(0,0,0,0)">Draw your picture and see how neurons learn</h1>
+                <div class="wrapper">
+                    <div class="dflex center">
+                        <div class="light centerScreen"></div>
                     </div>
-                    <p>We have new born neural network model here 🐣. It doesn't know how any of the numbers look.<br>
-                        In order to teach, we need to give it lots of examples of pictures, so let's get started!
-                        <br>
-                    </p>
-                    <p>
-                        <br>
-                        First, choose the number you will be drawing, so the model will understand what is going on.
-                        <br>
-                    </p>
-                    <p>
-                        <span>
-                            Enter your number here:   
-                        </span>
-                        <input id="rightAnswerBox" type="number" name="" value="1">
-                    </p>
-                    <p>
-                        Then, press the <span style="background-color: rgb(255, 77, 77); border-radius: 5px;padding: 0 5px;">save</span> button to start the learning function.
-                        <br>
-                        <img src="arrow.png" style="width: 130px;">
-                    </p> 
-                </div>
-                <div class="wrapper dflex">
-                    <div class="generate-box">
-                        <div class="generate-tools htools">
-                            <button onclick="savePicture();" class="btn tool">
-                                <i class="fa-regular fa-floppy-disk" style="color: #ffffff;"></i>
-                                <span style="color: #ffffff;font-size: 12px;margin-left: -1px;font-weight: 600">save</span>
-                            </button>
-                            <button onclick="learn();" class="btn tool">
-                                <i style="color: #ffffff;" class="fa-solid fa-gears"></i>
-                                <span style="color: #ffffff;font-size: 12px;margin-left: -1px;font-weight: 600">learn</span>
-                            </button>
-                        </div>
-                        <div class="generate-toolbar htools">
-                            <div class="tools">
-                                <i class="drawIcon fa-regular fa-circle"></i>
-                                <i class="drawIcon fa-regular fa-square"></i>
-                                <i class="drawIcon fa-solid fa-pencil"></i>
-                                <i class="drawIcon fa-solid fa-minus"></i>                            
+                    <div class="flex center">
+                        <div class="conspect">
+                            <h1 class="textcenter m60 textgradient">
+                                Draw your picture and see how neurons learn
+                            </h1>
+                            <p>We have new born neural network model here 🐣.<br> 
+                                It doesn't know how any of the numbers look.
+                                In order to teach, we need to give it lots of examples of pictures, so let's get started!
+                                <br>
+                            </p>
+                            <p>
+                                <br>
+                                1. Choose the number you will be drawing, so the model will understand what is going on;
+                                <br>
+                                2. Draw the number and press the save button to add your picture to the data base;
+                                <br>
+                                3. You can add several drawings, the more the better;
+                                <br>
+                                4. Press the learn button to see how your data affected the neural network.
+                            </p>
+                            <div class="textcenter m30">                            
+                                <a class="btn-main" onclick="showNeuralNetwork()">Start</a>
                             </div>
                         </div>
-                        <div id="generate-window">
-                        </div>
-                        <div class="hidden">
-                            <div class="pixel" ondragstart="return false;" id="originalPixel"></div>
-                        </div>
                     </div>
-                    <div id="neuronSection" class="generate-box sectioNeurons">
-                        <div class="neuralNetwork" id="neuralNetworkBox">
-                            <div class="layerbox" id="layerbox0"></div>
-                        </div>
-                        <div class="hidden">
-                            <div class="neuron" id="originalNeuron">0</div>
-                            <div class="rect" id="originalRect"></div>
-                        </div>                
-                    </div>
-                    <div id="graphsSection" class="generate-box"></div>
                 </div>
-                <div class="wrapper m30">
-                    <div id="allPicturesLength"></div>
-                    <div class="dflex" id="allPicturesBox"></div>
+                <div class="" id="neuralNetworkSection">
+                    <div class="wrapper m60">
+                        <div>
+                            <p>
+                                <span>
+                                    Enter your number here:   
+                                </span>
+                                <input autofocus min="0" max="9" id="rightAnswerBox" type="number" name="" value="">
+                            </p>
+                            
+                        </div>
+                        <div class="flex">
+                            <div class="generate-box">
+                                <div class="generate-tools htools">
+                                    <button onclick="savePicture();" class="btn tool">
+                                        <i class="fa-regular fa-floppy-disk" style="color: #ffffff;"></i>
+                                        <span style="color: #ffffff;font-size: 12px;margin-left: -1px;font-weight: 600">save</span>
+                                    </button>
+                                    <button onclick="learn();" class="btn tool">
+                                        <i style="color: #ffffff;" class="fa-solid fa-gears"></i>
+                                        <span style="color: #ffffff;font-size: 12px;margin-left: -1px;font-weight: 600">learn</span>
+                                    </button>
+                                </div>
+                                <div class="generate-toolbar htools">
+                                    <div class="tools">
+                                        <i class="drawIcon fa-regular fa-circle"></i>
+                                        <i class="drawIcon fa-regular fa-square"></i>
+                                        <i class="drawIcon fa-solid fa-pencil"></i>
+                                        <i class="drawIcon fa-solid fa-minus"></i>                            
+                                    </div>
+                                </div>
+                                <div id="generate-window">
+                                </div>
+                                <div class="hidden">
+                                    <div class="pixel" ondragstart="return false;" id="originalPixel"></div>
+                                </div>
+                            </div>
+                            <div id="neuronSection" class="generate-box sectioNeurons">
+                                <div class="neuralNetwork" id="neuralNetworkBox">
+                                    <div class="layerbox" id="layerbox0"></div>
+                                </div>
+                                <div class="hidden">
+                                    <div class="neuron" id="originalNeuron">0</div>
+                                    <div class="rect" id="originalRect"></div>
+                                </div>                
+                            </div>
+                            <div id="graphsSection" class="generate-box"></div>
+                        </div   >
+                    </div>
+                    <div class="wrapper m30">
+                        <div id="allPicturesLength"></div>
+                        <div class="dflex" id="allPicturesBox"></div>
+                    </div>
                 </div>
             </section>
         </main>
-        <footer>
+        <footer >
             <div class="dflex center m120">
                 <span style="color: #474b55">made by <a style="color: #474b55; text-decoration: underline;" href="https://github.com/kuanyshoteu">Kuanysh Oteu</a></span>
             </div>

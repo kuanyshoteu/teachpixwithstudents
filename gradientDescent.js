@@ -42,7 +42,7 @@ function calculateCost(){
 		predictedAns = predict(crntPicture)
 		sumOfErrors += (rightAnswers[i] - predictedAns)**2;
 	}
-	return sumOfErrors/allPictures.length;
+	return sumOfErrors/(allPictures.length*10);
 	
 }
 
@@ -67,12 +67,14 @@ function calculateDerivatives(){
 	// lim (f(x+alpha) - f(x))/alpha
 	//   (alpha -> 0)
 
-	let alpha = 0.0001; // Прям стремится к нулю не можем сделать, просто близкое что-то возьмем
+	let alpha = 0.01; // Прям стремится к нулю не можем сделать, просто близкое что-то возьмем
 	for(let i = 0; i < numberOfLayers-1; i++){
 		for(let j = 0; j < lengthOfLayers[i+1]; j++){
 			for(let k = 0; k < lengthOfLayers[i]; k++){
 				weightedEdges[i][j][k] += alpha; // одна нитка + альфа
-				derivativesForEdges[i][j][k] = (calculateCost() - originalCost)/alpha; 
+				newCost = calculateCost();
+				derivativesForEdges[i][j][k] = (newCost - originalCost); 
+				console.log("cost", newCost, originalCost, (newCost - originalCost)/alpha)
 				// это почти формула производной 
 
 				// Производную от одной нитки вычислил (почти точно), 
@@ -94,9 +96,11 @@ function calculateDerivatives(){
 			freeTerms[i][j] -= alpha;
 		}
 	}
+	console.log("derivativesForEdges")
+	console.log(derivativesForEdges)
 }
 
-let learnRate = 0.01;
+let learnRate = 0.00001;
 function gradientDescent(){
 	for(let i = 0; i < numberOfLayers-1; i++){
 		for(let j = 0; j < lengthOfLayers[i+1]; j++){
@@ -106,8 +110,36 @@ function gradientDescent(){
 			}
 		}
 	}
+	console.log("weightedEdges")
+	console.log(weightedEdges)
 }
 
+function colorWires(){
+	for(let i = 1; i < numberOfLayers-1; i++){
+		for(let j = 0; j < lengthOfLayers[i+1]; j++){
+			for(let k = 0; k < lengthOfLayers[i]; k++){
+				weight = weightedEdges[i][j][k]*100;
+				r = 48 + weight;
+				g = 53 + weight;
+				b = 64 + weight;
+				rgb = "rgb("+r+", "+g+", "+b+")";
+
+			    neuronFromHeight = neuronHeights[i][k];
+			    neuronToHeight = neuronHeights[i+1][j];
+			    if(neuronFromHeight < neuronToHeight)
+			        diagonal = " right";
+			    else
+			        diagonal = " left";
+
+			    let line = "linear-gradient(to top "+diagonal+", rgba(0,0,0,0) 0%, rgba(0,0,0,0) calc(50% - 0.5px),"+rgb+" calc(50% + 0.5px), rgba(0,0,0,0) calc(50% + 1px),rgba(0,0,0,0) 100%)"
+
+				crntRectId = "rect_layerFrom"+i+"layerTo"+(i+1)+"neuronFrom"+k+"neuronToIndex"+j;				
+				crntRect = document.getElementById(crntRectId);
+				crntRect.style.background = line;				
+			}
+		}
+	}
+}
 function learn(){
 	for(let t = 0; t < 10; t++){
 		console.log("learn", t)
@@ -116,30 +148,7 @@ function learn(){
 		gradientDescent();
 		console.log("gradientDescent end")
 	}
-	for(let i = 1; i < numberOfLayers-1; i++){
-		for(let j = 0; j < lengthOfLayers[i+1]; j++){
-			for(let k = 0; k < lengthOfLayers[i]; k++){
-				r = 48+ weightedEdges[i][j][k] * 100;
-				g = 53+ weightedEdges[i][j][k] * 100;
-				r = 64+ weightedEdges[i][j][k] * 100;
-				rgb = "rgb("+r+", "+g+", "+b+")"
-
-			    neuronFrom = document.getElementById("neuron_layer"+i+"_neuron"+k)
-			    // console.log("neuron_layer"+i+"_neuron"+k)
-			    neuronTo = document.getElementById("neuron_layer"+(i+1)+"_neuron"+j)
-			    if(neuronFrom.offsetTop < neuronTo.offsetTop)
-			        diagonal = " right";
-			    else
-			        diagonal = " left";
-
-			    let line = "linear-gradient(to top "+diagonal+", rgba(0,0,0,0) 0%, rgba(0,0,0,0) calc(50% - 0.5px),"+rgb+" calc(50% + 0.5px), rgba(0,0,0,0) calc(50% + 1px),rgba(0,0,0,0) 100%)"
-
-
-				crntRectId = "rect_layerFrom"+i+"layerTo"+(i+1)+"neuronFrom"+k+"neuronToIndex"+j;				
-				crntRect = document.getElementById(crntRectId)
-				crntRect.style.background = line;				
-			}
-		}
-	}
+	colorWires();
 }
 
+colorWires();
