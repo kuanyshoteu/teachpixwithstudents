@@ -1,65 +1,126 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="eng">
+    
     <head>
         <link rel="stylesheet" href="style.css">
-        <title>Super puper site</title>
+        <link rel="stylesheet" href="paint.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+        <title>TeachPix</title>
     </head>
+
     <body>
-    	<div class="krug"></div>
-    	<nav class="menu">
-    		<a href="#" class="logo">Kuanysh Oteu</a>
-    		<a class="link" href="#aboutme">About me</a>
-    		<a class="link" href="#skills">Skills</a>
-    		<a class="link" href="#projects">Projects</a>
-    		<a class="link" href="#blog">Blog</a>
-    		<a class="btn right" href="">Contact me</a>
-    	</nav>
-    	<section id="hero">
-    		<div class="korobka">
-    			<div>
-	    			<h2>Teacher of Computer Science</h2>
-	    			<h1>Kuanysh Oteu</h1>
-	    			<h2>I'm a teacher at RPhMSh</h2>
-	    		</div>
-    		</div>
-    		<div class="korobka2">
-    			<img src="me.png">
-    		</div>
-    	</section>
-    	<section id="aboutme">
-			<div style="text-align: center;">
-				<h1 id="rollanText">Rollan ne otvlekaisia</h1>
-				<input id="input1" placeholder="Введите текст">
-				<a onclick="rollan()" class="btn">Work</a>
-			</div>
-		</section>
-    	<section id="skills">
-    		<div class="dflex">
-    			<div class="w400">
-	    			<h2>Алгебра</h2>
-	    		</div>
-    			<div class="dflex ml50">
-    				
-    			</div>
-    		</div>
-    		<div class="dflex">
-    			<div class="w400">
-	    			<h2>Геометрия</h2>
-	    		</div>
-    			<div class="dflex ml50">
-    				<div class="circle"></div>
-    				<div class="circle"></div>
-    				<div class="circle"></div>
-    				<div class="circle"></div>
-    				<div class="circle"></div>
-    			</div>
-    		</div>
-    		<div>
-    			<input type="" name="">
-    		</div>
-    	</section>
-    	<section id="projects">Projects</section>
-    	<section id="blog">Blog</section>
-		<script src="script.js"></script>
+        <header>
+            <nav>
+                <span>TeachPix</span>
+                <span>About</span>
+                <a href="#"><i class="fa-regular fa-user" style="color: #ffffff;"></i></a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="generate-block">
+                <div class="wrapper">
+                    <div class="dflex center">
+                        <div class="light centerScreen"></div>
+                    </div>
+                    <div class="flex center">
+                        <div class="conspect">
+                            <h1 class="textcenter m60 textgradient">
+                                Draw your picture and see how neurons learn
+                            </h1>
+                            <p>We have new born neural network model here 🐣.<br> 
+                                It doesn't know how any of the numbers look.
+                                In order to teach, we need to give it lots of examples of pictures, so let's get started!
+                                <br>
+                            </p>
+                            <p>
+                                <br>
+                                1. Choose the number you will be drawing, so the model will understand what is going on;
+                                <br>
+                                2. Draw the number and press the save button to add your picture to the data base;
+                                <br>
+                                3. You can add several drawings, the more the better;
+                                <br>
+                                4. Press the learn button to see how your data affected the neural network.
+                            </p>
+                            <div class="textcenter m30">                            
+                                <a class="btn-main" onclick="showNeuralNetwork()">Start</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="" id="neuralNetworkSection">
+                    <div class="wrapper m60">
+                        <div>
+                            <p>
+                                <span>
+                                    Enter your number here:   
+                                </span>
+                                <input autofocus min="0" max="9" id="rightAnswerBox" type="number" name="" value="">
+                            </p>
+                            
+                        </div>
+                        <div class="flex">
+                            <div class="generate-box">
+                                <div class="generate-tools htools">
+                                    <button onclick="savePicture();" class="btn tool">
+                                        <i class="fa-regular fa-floppy-disk" style="color: #ffffff;"></i>
+                                        <span style="color: #ffffff;font-size: 12px;margin-left: -1px;font-weight: 600">save</span>
+                                    </button>
+                                    <button onclick="learn();" class="btn tool">
+                                        <i style="color: #ffffff;" class="fa-solid fa-gears"></i>
+                                        <span style="color: #ffffff;font-size: 12px;margin-left: -1px;font-weight: 600">learn</span>
+                                    </button>
+                                </div>
+                                <div class="generate-toolbar htools">
+                                    <div class="tools">
+                                        <i class="drawIcon fa-regular fa-circle"></i>
+                                        <i class="drawIcon fa-regular fa-square"></i>
+                                        <i class="drawIcon fa-solid fa-pencil"></i>
+                                        <i class="drawIcon fa-solid fa-minus"></i>                            
+                                    </div>
+                                </div>
+                                <div id="generate-window">
+                                </div>
+                                <div class="hidden">
+                                    <div class="pixel" ondragstart="return false;" id="originalPixel"></div>
+                                </div>
+                            </div>
+                            <div id="neuronSection" class="generate-box sectioNeurons">
+                                <div class="neuralNetwork" id="neuralNetworkBox">
+                                    <div class="layerbox" id="layerbox0"></div>
+                                </div>
+                                <div class="hidden">
+                                    <div class="neuron" id="originalNeuron">0</div>
+                                    <div class="rect" id="originalRect"></div>
+                                </div>                
+                            </div>
+                            <div id="graphsSection" class="generate-box"></div>
+                        </div   >
+                    </div>
+                    <div class="wrapper m30">
+                        <div id="allPicturesLength"></div>
+                        <div class="dflex" id="allPicturesBox"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer >
+            <div class="dflex center m120">
+                <span style="color: #474b55">made by <a style="color: #474b55; text-decoration: underline;" href="https://github.com/kuanyshoteu">Kuanysh Oteu</a></span>
+            </div>
+        </footer>
     </body>
+    <script  src="classes.js"></script>
+    <script  src="main.js"></script>
+    <script src="data.js"></script>
+    <script src="neuralNetwork.js"></script>
+    <script src="paint.js"></script>
+    <script src="neuralNetworkHTML.js"></script>
+    <script src="gradientDescent.js"></script>
 </html>
